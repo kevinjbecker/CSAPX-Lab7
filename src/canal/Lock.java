@@ -17,9 +17,14 @@ package canal;
  *
  * @author YOUR NAME HERE
  */
-public class Lock implements CanalSegment {
+public class Lock implements CanalSegment
+{
 
     private LockMaster guard;
+    private int num;
+    private int length;
+    private int depth;
+    public boolean available;
 
     /**
      * Create lock and set parameters for identification and time calculations.
@@ -28,8 +33,12 @@ public class Lock implements CanalSegment {
      * @param depth difference, in feet, of water level between filled
      *              and drained states
      */
-    public Lock( int num, int length, int depth ) {
+    public Lock( int num, int length, int depth )
+    {
         this.guard = new LockMaster( this );
+        this.num = num;
+        this.length = length;
+        this.depth = depth;
     }
 
     /**
@@ -38,8 +47,9 @@ public class Lock implements CanalSegment {
      *   <code>Lock <i>num</i> [len=<i>length</i>',ht=<i>height</i>']</code>
      */
     @Override
-    public String toString() {
-        return "";
+    public String toString()
+    {
+        return "Lock " + num + "[len=" + length + "', ht" + depth + "']";
     }
 
     /**
@@ -48,7 +58,8 @@ public class Lock implements CanalSegment {
      * @return this lock's LockMaster
      */
     @Override
-    public CanalSegmentGuard getGuard() {
+    public CanalSegmentGuard getGuard()
+    {
         return this.guard;
     }
 
@@ -63,7 +74,8 @@ public class Lock implements CanalSegment {
      * the exit gate.
      */
     @Override
-    public float computeTime( int boatLength ) {
+    public float computeTime( int boatLength )
+    {
         return 100.0F;
     }
 
@@ -71,19 +83,24 @@ public class Lock implements CanalSegment {
      * Is this lock unoccupied? (Used by LockMaster)
      * @return true iff there is no boat in the lock.
      */
-    public boolean isAvailable() {
-        return false;
+    public boolean isAvailable()
+    {
+        return available;
     }
 
     /**
      * Set the available state to true.
      */
-    public void leave() {
+    public void leave()
+    {
+        available = true;
     }
 
     /**
      * Set the available state to false.
      */
-    public void enter() {
+    public void enter()
+    {
+        available = false;
     }
 }

@@ -68,7 +68,9 @@ public class Boat extends Thread {
      * <em>Important</em> - For the simulation to work this method has to
      * run in a separate Thread, using {@link Thread#start()}.
      */
-    public void run() {
+    public void run()
+    {
+        this.route.forEach( (lock)-> Utilities.log("hello") );
         Utilities.log( this.name + " has ended its trip." );
     }
 }

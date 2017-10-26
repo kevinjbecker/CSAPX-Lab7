@@ -16,7 +16,9 @@ public class LockMaster implements CanalSegmentGuard {
      * Create a LockMaster. Admission ID system is initialized.
      * @param canalLock the lock to which this LockMaster is assigned
      */
-    public LockMaster( Lock canalLock ) {
+    public LockMaster( Lock canalLock )
+    {
+
     }
 
     /**
@@ -35,7 +37,8 @@ public class LockMaster implements CanalSegmentGuard {
      * @return some unique value greater than {@link CanalSegmentGuard#NO_BOAT}
      */
     @Override
-    public synchronized int requestEntryToSegment() {
+    public synchronized int requestEntryToSegment()
+    {
         return 1;
     }
 
@@ -53,7 +56,8 @@ public class LockMaster implements CanalSegmentGuard {
      *                   LockMaster's canal
      */
     @Override
-    public synchronized void waitForTurn( int boatID, String goingInMsg ) {
+    public synchronized void waitForTurn( int boatID, String goingInMsg )
+    {
         // ...
         Utilities.log( goingInMsg );
     }
@@ -71,7 +75,8 @@ public class LockMaster implements CanalSegmentGuard {
      *                   once the boat has been allowed in to this guard's
      */
     @Override
-    public synchronized void leavingSegment( String goingOutMsg ) {
+    public synchronized void leavingSegment( String goingOutMsg )
+    {
         // ...
         Utilities.log( goingOutMsg );
     }
