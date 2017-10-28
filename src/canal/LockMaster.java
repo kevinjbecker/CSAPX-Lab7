@@ -1,5 +1,8 @@
 package canal;
 
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Queue;
 
 /**
@@ -8,9 +11,15 @@ import java.util.Queue;
  * Note that locks are unidirectional, as is the entire canal
  * system at this time.
  *
- * @author YOUR NAME HERE
+ * @author Kevin Becker
  */
 public class LockMaster implements CanalSegmentGuard {
+
+    private Lock canalLock;
+
+    private Queue<Integer> queue = new LinkedList<>();
+
+    private int idCount = 0;
 
     /**
      * Create a LockMaster. Admission ID system is initialized.
@@ -18,7 +27,7 @@ public class LockMaster implements CanalSegmentGuard {
      */
     public LockMaster( Lock canalLock )
     {
-
+        this.canalLock = canalLock;
     }
 
     /**
@@ -39,7 +48,8 @@ public class LockMaster implements CanalSegmentGuard {
     @Override
     public synchronized int requestEntryToSegment()
     {
-        return 1;
+        queue.add(++idCount);
+        return idCount;
     }
 
     /**
@@ -58,8 +68,11 @@ public class LockMaster implements CanalSegmentGuard {
     @Override
     public synchronized void waitForTurn( int boatID, String goingInMsg )
     {
-        // ...
-        Utilities.log( goingInMsg );
+        if(canalLock.isAvailable() && queue.peek() == boatID)
+        {
+            queue.poll();
+            Utilities.log( goingInMsg );
+        }
     }
 
     /**

@@ -55,7 +55,19 @@ public class SmallTest {
 
         Boat b1 = new Boat( "Geddes", 25, fullCanalRoute );
 
+        Boat b2 = new Boat( "Computer", 40, fullCanalRoute );
+
         b1.start();
+        b2.start();
+        try
+        {
+            b1.join();
+            b2.join();
+            System.out.println("Joins just happened!");
+        }
+        catch(InterruptedException e){
+            System.out.print("");
+        }
     }
 
     private static void smallTest() {

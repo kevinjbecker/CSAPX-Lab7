@@ -15,7 +15,7 @@ package canal;
  *     <li>Lock gates on exit side close. (Assume 0 time.)</li>
  * </ol>
  *
- * @author YOUR NAME HERE
+ * @author Kevin Becker
  */
 public class Lock implements CanalSegment
 {
@@ -76,7 +76,14 @@ public class Lock implements CanalSegment
     @Override
     public float computeTime( int boatLength )
     {
-        return 100.0F;
+        // we need to compute two times the length of the boat as well as the length of the lock
+        float travelTime = ((2*boatLength) + this.length) * Utilities.BOAT_LOCK_SPEED;
+
+        // add the above to the time it takes to fill
+        float riseTime = this.depth * Utilities.UP_DOWN_SPEED;
+
+        // return the sum of the time it takes to travel as well as rise in the lock
+        return travelTime + riseTime;
     }
 
     /**

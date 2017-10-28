@@ -70,7 +70,15 @@ public class Boat extends Thread {
      */
     public void run()
     {
-        this.route.forEach( (lock)-> Utilities.log("hello") );
+        for (CanalSegment segment : route)
+        {
+            CanalSegmentGuard master = segment.getGuard();
+            int id = master.requestEntryToSegment();
+            float time = segment.computeTime(this.length);
+            master.waitForTurn(id, this + " is entering " + segment + " for " + time + " minutes.");
+
+            master.leavingSegment(this + " has left " + segment + ".");
+        }
         Utilities.log( this.name + " has ended its trip." );
     }
 }
