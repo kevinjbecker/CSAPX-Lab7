@@ -40,7 +40,7 @@ public class Boat extends Thread {
     @Override
     public String toString()
     {
-        return this.name + "[len=" + this.length + "]";
+        return this.name + "[len=" + this.length + "']";
     }
 
     /**
@@ -70,15 +70,32 @@ public class Boat extends Thread {
      */
     public void run()
     {
+        // go through our route until we have reached our endpoint
         for (CanalSegment segment : route)
         {
-            CanalSegmentGuard master = segment.getGuard();
-            int id = master.requestEntryToSegment();
-            float time = segment.computeTime(this.length);
-            master.waitForTurn(id, this + " is entering " + segment + " for " + time + " minutes.");
+            // log where we are arriving at now
+            Utilities.log(this.name + " is arriving at " + segment + ".");
 
-            master.leavingSegment(this + " has left " + segment + ".");
+            // call the guard
+            CanalSegmentGuard guard = segment.getGuard();
+
+            // get our id
+            int id = guard.requestEntryToSegment();
+
+            // compute the time we need to spend
+            float time = segment.computeTime(this.length);
+
+            // wait until it is out turn (block until it's open)
+            guard.waitForTurn(id, this + " is entering " + segment + " for " + Math.round(time) + " minutes.");
+
+            // sleep until our time is up (a.k.a. we've completed the segment fully)
+            Utilities.sleep(Math.round(time));
+
+            // alert we are leaving the segment
+            guard.leavingSegment(this + " has left " + segment + ".");
         }
+
+        // when we are here we have completed our trip and we log it.
         Utilities.log( this.name + " has ended its trip." );
     }
 }

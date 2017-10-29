@@ -24,7 +24,7 @@ public class Lock implements CanalSegment
     private int num;
     private int length;
     private int depth;
-    public boolean available;
+    private boolean available;
 
     /**
      * Create lock and set parameters for identification and time calculations.
@@ -49,7 +49,7 @@ public class Lock implements CanalSegment
     @Override
     public String toString()
     {
-        return "Lock " + num + "[len=" + length + "', ht" + depth + "']";
+        return "Lock " + num + "[len=" + length + "', ht=" + depth + "']";
     }
 
     /**
@@ -76,14 +76,14 @@ public class Lock implements CanalSegment
     @Override
     public float computeTime( int boatLength )
     {
-        // we need to compute two times the length of the boat as well as the length of the lock
-        float travelTime = ((2*boatLength) + this.length) * Utilities.BOAT_LOCK_SPEED;
+        // the amount it times for the boat to move through the lock
+        float movementThroughLock = (boatLength + this.length) / Utilities.BOAT_LOCK_SPEED;
 
-        // add the above to the time it takes to fill
-        float riseTime = this.depth * Utilities.UP_DOWN_SPEED;
+        // the time it takes to fill the lock
+        float waterRiseTime = (this.depth*2) / Utilities.UP_DOWN_SPEED;
 
         // return the sum of the time it takes to travel as well as rise in the lock
-        return travelTime + riseTime;
+        return movementThroughLock + waterRiseTime;
     }
 
     /**

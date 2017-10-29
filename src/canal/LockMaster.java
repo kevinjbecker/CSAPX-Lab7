@@ -1,7 +1,5 @@
 package canal;
 
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -15,8 +13,10 @@ import java.util.Queue;
  */
 public class LockMaster implements CanalSegmentGuard {
 
+    /** the lock we are guarding */
     private Lock canalLock;
 
+    /** the queue for each boat */
     private Queue<Integer> queue = new LinkedList<>();
 
     private int idCount = 0;
@@ -68,11 +68,20 @@ public class LockMaster implements CanalSegmentGuard {
     @Override
     public synchronized void waitForTurn( int boatID, String goingInMsg )
     {
-        if(canalLock.isAvailable() && queue.peek() == boatID)
+        while (!canalLock.isAvailable() && boatID != queue.peek())
         {
-            queue.poll();
-            Utilities.log( goingInMsg );
+            try
+            {
+                wait();
+            }
+            catch (InterruptedException e)
+            {
+                // nothing needs to happen
+            }
         }
+
+        canalLock.enter();
+        Utilities.log( goingInMsg );
     }
 
     /**
@@ -90,7 +99,9 @@ public class LockMaster implements CanalSegmentGuard {
     @Override
     public synchronized void leavingSegment( String goingOutMsg )
     {
-        // ...
+        queue.poll();
+        canalLock.leave();
+        notifyAll();
         Utilities.log( goingOutMsg );
     }
 

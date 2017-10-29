@@ -49,25 +49,26 @@ public class SmallTest {
      * @param args not used
      */
     public static void main( String[] args ) {
-        CanalSegment lock1 = new Lock( 1, 4, 30 );
+        //CanalSegment lock1 = new Lock( 1, 4, 30 );
 
-        List< CanalSegment > fullCanalRoute = Arrays.asList( lock1 );
+        //List< CanalSegment > fullCanalRoute = Arrays.asList( lock1 );
 
-        Boat b1 = new Boat( "Geddes", 25, fullCanalRoute );
+        //Boat b1 = new Boat( "Geddes", 25, fullCanalRoute );
 
-        Boat b2 = new Boat( "Computer", 40, fullCanalRoute );
+        //Boat b2 = new Boat( "Computer", 40, fullCanalRoute );
 
-        b1.start();
-        b2.start();
-        try
-        {
-            b1.join();
-            b2.join();
-            System.out.println("Joins just happened!");
-        }
-        catch(InterruptedException e){
-            System.out.print("");
-        }
+        //b1.start();
+        //b2.start();
+        //try
+        //{
+        //    b1.join();
+        //    b2.join();
+        //    System.out.println("Joins just happened!");
+        //}
+        //catch(InterruptedException e){
+        //    System.out.print("");
+        //}
+        smallTest();
     }
 
     private static void smallTest() {
