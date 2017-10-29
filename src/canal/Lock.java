@@ -19,11 +19,15 @@ package canal;
  */
 public class Lock implements CanalSegment
 {
-
+    /** the guard of this lock to keep our lock running smooth and one boat at a time. */
     private LockMaster guard;
+    /** the number of the lock. */
     private int num;
+    /** the length of the lock. */
     private int length;
+    /** the depth of the lock (the amount of water we need to switch levels). */
     private int depth;
+    /** the boolean if we are available or not. */
     private boolean available;
 
     /**
@@ -35,10 +39,12 @@ public class Lock implements CanalSegment
      */
     public Lock( int num, int length, int depth )
     {
+        // sets the fields
         this.guard = new LockMaster( this );
         this.num = num;
         this.length = length;
         this.depth = depth;
+        this.available = true;
     }
 
     /**

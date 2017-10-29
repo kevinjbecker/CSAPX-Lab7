@@ -13,13 +13,16 @@ import java.util.Queue;
  */
 public class LockMaster implements CanalSegmentGuard {
 
-    /** the lock we are guarding */
+    /** the lock we are guarding. */
     private Lock canalLock;
 
-    /** the queue for each boat */
-    private Queue<Integer> queue = new LinkedList<>();
+    /** the queue for each boat. */
+    private Queue<Integer> queue;
 
-    private int idCount = 0;
+    /** the count of ids.<br/>
+     *  this method was chosen over any other way since it was always constant and there can be no
+     *  duplicates in the queue. */
+    private int idCount;
 
     /**
      * Create a LockMaster. Admission ID system is initialized.
@@ -27,7 +30,10 @@ public class LockMaster implements CanalSegmentGuard {
      */
     public LockMaster( Lock canalLock )
     {
+        // set the fields to what they need to be
         this.canalLock = canalLock;
+        this.queue = new LinkedList<>();
+        this.idCount = 0;
     }
 
     /**
@@ -48,7 +54,9 @@ public class LockMaster implements CanalSegmentGuard {
     @Override
     public synchronized int requestEntryToSegment()
     {
+        // adds the next id to the queue
         queue.add(++idCount);
+        // return the id
         return idCount;
     }
 
@@ -68,19 +76,23 @@ public class LockMaster implements CanalSegmentGuard {
     @Override
     public synchronized void waitForTurn( int boatID, String goingInMsg )
     {
+        // while we are not the next in the line or the lock isn't available
         while (!canalLock.isAvailable() && boatID != queue.peek())
         {
+            // we wait until it is our turn
             try
             {
                 wait();
             }
             catch (InterruptedException e)
             {
-                // nothing needs to happen
+                // nothing to do here we just want to catch the interrupt
             }
         }
 
+        // when we get here it is our turn to enter the lock (so we do that here)
         canalLock.enter();
+        // we log that we are going in to the lock
         Utilities.log( goingInMsg );
     }
 
@@ -99,10 +111,14 @@ public class LockMaster implements CanalSegmentGuard {
     @Override
     public synchronized void leavingSegment( String goingOutMsg )
     {
+        // we remove the first person in the queue
         queue.poll();
+        // leave the lock
         canalLock.leave();
-        notifyAll();
+        // log that our boat left the lock
         Utilities.log( goingOutMsg );
+        // notify all of the other boats that it may be their turn to enter the lock
+        notifyAll();
     }
 
 }

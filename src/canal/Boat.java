@@ -13,8 +13,11 @@ package canal;
  */
 public class Boat extends Thread {
 
+    /** the name of the boat. */
     private String name;
+    /** the length of the boat. */
     private int length;
+    /** the route that the boat needs to take (each of the items it has to pass on its trip). */
     private Iterable< CanalSegment > route;
 
     /**
@@ -26,6 +29,7 @@ public class Boat extends Thread {
      */
     public Boat( String name, int length, Iterable< CanalSegment > route )
     {
+        // sets the fields
         this.name = name;
         this.length = length;
         this.route = route;
