@@ -19,7 +19,7 @@ package canal;
  */
 public class Lock implements CanalSegment
 {
-    /** the guard of this lock to keep our lock running smooth and one boat at a time. */
+    /** the guard of this lock to keep our lock running smooth and one boat at a time.  */
     private LockMaster guard;
     /** the number of the lock. */
     private int num;

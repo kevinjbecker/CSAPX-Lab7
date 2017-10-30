@@ -33,7 +33,7 @@ public class LockMaster implements CanalSegmentGuard {
         // set the fields to what they need to be
         this.canalLock = canalLock;
         this.queue = new LinkedList<>();
-        this.idCount = 0;
+        this.idCount = NO_BOAT;
     }
 
     /**
