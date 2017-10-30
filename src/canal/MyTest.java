@@ -229,8 +229,8 @@ public class MyTest
             assert false: "Thread interrupted.";
         }
 
-        long endTime = System.nanoTime();
 
+        long endTime = System.nanoTime();
         long totalElapsedTimeMinutes = ((endTime - startTime) / 1000000000) / 60;
         Utilities.log("All five boats have finished their cruise. This took " + totalElapsedTimeMinutes + " real-time minutes.");
     }
