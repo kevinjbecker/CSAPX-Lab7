@@ -11,34 +11,34 @@ import java.util.List;
  *     Here is a sample run. Times, of course, will vary slightly each time.
  *
  <pre>
- 0:00: Geddes arriving at Lock 1[len=4',ht=30']
- 0:00: Geddes[len=25'] is entering Lock 1[len=4',ht=30'] for 8 minutes.
- 0:01: Hawley arriving at Lock 1[len=4',ht=30']
- 0:08: Geddes[len=25'] has left Lock 1[len=4',ht=30']
- 0:08: Hawley[len=35'] is entering Lock 1[len=4',ht=30'] for 8 minutes.
- 0:08: Geddes arriving at Level 1-to-2
- 0:08: Geddes[len=25'] is entering Level 1-to-2 for 23 minutes.
+ 0:00: Geddes arriving at Lock 1[len=40',ht=30']
+ 0:00: Geddes[len=25'] is entering Lock 1[len=40',ht=30'] for 9 minutes.
+ 0:01: Hawley arriving at Lock 1[len=40',ht=30']
+ 0:09: Geddes[len=25'] has left Lock 1[len=40',ht=30']
+ 0:09: Hawley[len=35'] is entering Lock 1[len=40',ht=30'] for 9 minutes.
+ 0:09: Geddes arriving at Level 1-to-2
+ 0:09: Geddes[len=25'] is entering Level 1-to-2 for 23 minutes.
  0:11: Clinton arriving at Level 1-to-2
  0:11: Clinton[len=40'] is entering Level 1-to-2 for 23 minutes.
- 0:16: Hawley[len=35'] has left Lock 1[len=4',ht=30']
- 0:16: Hawley arriving at Level 1-to-2
- 0:16: Hawley[len=35'] is entering Level 1-to-2 for 23 minutes.
- 0:31: Geddes[len=25'] has left Level 1-to-2
- 0:31: Geddes arriving at Lock 2[len=50',ht=20']
- 0:31: Geddes[len=25'] is entering Lock 2[len=50',ht=20'] for 7 minutes.
+ 0:18: Hawley[len=35'] has left Lock 1[len=40',ht=30']
+ 0:18: Hawley arriving at Level 1-to-2
+ 0:18: Hawley[len=35'] is entering Level 1-to-2 for 23 minutes.
+ 0:32: Geddes[len=25'] has left Level 1-to-2
+ 0:32: Geddes arriving at Lock 2[len=50',ht=20']
+ 0:32: Geddes[len=25'] is entering Lock 2[len=50',ht=20'] for 7 minutes.
  0:34: Clinton[len=40'] has left Level 1-to-2
  0:34: Clinton arriving at Lock 2[len=50',ht=20']
- 0:38: Geddes[len=25'] has left Lock 2[len=50',ht=20']
- 0:38: Geddes has ended its trip.
- 0:38: Clinton[len=40'] is entering Lock 2[len=50',ht=20'] for 7 minutes.
- 0:39: Hawley[len=35'] has left Level 1-to-2
- 0:39: Hawley arriving at Lock 2[len=50',ht=20']
- 0:45: Clinton[len=40'] has left Lock 2[len=50',ht=20']
- 0:45: Hawley[len=35'] is entering Lock 2[len=50',ht=20'] for 7 minutes.
- 0:45: Clinton has ended its trip.
- 0:52: Hawley[len=35'] has left Lock 2[len=50',ht=20']
- 0:52: Hawley has ended its trip.
-</pre>
+ 0:39: Geddes[len=25'] has left Lock 2[len=50',ht=20']
+ 0:39: Clinton[len=40'] is entering Lock 2[len=50',ht=20'] for 7 minutes.
+ 0:39: Geddes has ended its trip.
+ 0:41: Hawley[len=35'] has left Level 1-to-2
+ 0:41: Hawley arriving at Lock 2[len=50',ht=20']
+ 0:46: Clinton[len=40'] has left Lock 2[len=50',ht=20']
+ 0:46: Clinton has ended its trip.
+ 0:46: Hawley[len=35'] is entering Lock 2[len=50',ht=20'] for 7 minutes.
+ 0:53: Hawley[len=35'] has left Lock 2[len=50',ht=20']
+ 0:53: Hawley has ended its trip.
+ </pre>
  */
 public class SmallTest {
 
@@ -49,25 +49,13 @@ public class SmallTest {
      * @param args not used
      */
     public static void main( String[] args ) {
-        //CanalSegment lock1 = new Lock( 1, 4, 30 );
+        // CanalSegment lock1 = new Lock( 1, 40, 30 );
 
-        //List< CanalSegment > fullCanalRoute = Arrays.asList( lock1 );
+        // List< CanalSegment > fullCanalRoute = Arrays.asList( lock1 );
 
-        //Boat b1 = new Boat( "Geddes", 25, fullCanalRoute );
+        // Boat b1 = new Boat( "Geddes", 25, fullCanalRoute );
 
-        //Boat b2 = new Boat( "Computer", 40, fullCanalRoute );
-
-        //b1.start();
-        //b2.start();
-        //try
-        //{
-        //    b1.join();
-        //    b2.join();
-        //    System.out.println("Joins just happened!");
-        //}
-        //catch(InterruptedException e){
-        //    System.out.print("");
-        //}
+        // b1.start();
         smallTest();
     }
 

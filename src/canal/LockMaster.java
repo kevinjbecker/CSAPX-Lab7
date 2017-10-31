@@ -90,10 +90,10 @@ public class LockMaster implements CanalSegmentGuard {
             }
         }
 
-        // when we get here it is our turn to enter the lock (so we do that here)
-        canalLock.enter();
         // we log that we are going in to the lock
         Utilities.log( goingInMsg );
+        // when we get here it is our turn to enter the lock (so we do that here)
+        canalLock.enter();
     }
 
     /**

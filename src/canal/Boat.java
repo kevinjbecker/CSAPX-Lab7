@@ -12,7 +12,6 @@ package canal;
  * @author Kevin Becker
  */
 public class Boat extends Thread {
-
     /** the name of the boat. */
     private String name;
     /** the length of the boat. */
@@ -78,7 +77,7 @@ public class Boat extends Thread {
         for (CanalSegment segment : route)
         {
             // log where we are arriving at now
-            Utilities.log(this.name + " is arriving at " + segment + ".");
+            Utilities.log(this.name + " arriving at " + segment + ".");
 
             // call the guard
             CanalSegmentGuard guard = segment.getGuard();
