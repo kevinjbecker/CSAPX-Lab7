@@ -86,10 +86,10 @@ public class Lock implements CanalSegment
         float movementThroughLock = (boatLength + this.length) / Utilities.BOAT_LOCK_SPEED;
 
         // the time it takes to fill the lock
-        float waterRiseTime = (this.depth*2) / Utilities.UP_DOWN_SPEED;
+        float waterRiseFallTime = (this.depth*2) / Utilities.UP_DOWN_SPEED;
 
         // return the sum of the time it takes to travel as well as rise in the lock
-        return movementThroughLock + waterRiseTime;
+        return movementThroughLock + waterRiseFallTime;
     }
 
     /**
