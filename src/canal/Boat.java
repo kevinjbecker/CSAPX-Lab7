@@ -77,7 +77,7 @@ public class Boat extends Thread {
         for (CanalSegment segment : route)
         {
             // log where we are arriving at now
-            Utilities.log(this.name + " arriving at " + segment + ".");
+            Utilities.log( this.name + " arriving at " + segment + "." );
 
             // call the guard
             CanalSegmentGuard guard = segment.getGuard();
@@ -86,16 +86,16 @@ public class Boat extends Thread {
             int id = guard.requestEntryToSegment();
 
             // compute the time we need to spend
-            float time = segment.computeTime(this.length);
+            long time = Math.round( segment.computeTime(this.length) );
 
             // wait until it is out turn (block until it's open)
-            guard.waitForTurn(id, this + " is entering " + segment + " for " + Math.round(time) + " minutes.");
+            guard.waitForTurn( id, this + " is entering " + segment + " for " + time + " minutes." );
 
             // sleep until our time is up (a.k.a. we've completed the segment fully)
-            Utilities.sleep(Math.round(time));
+            Utilities.sleep(time);
 
             // alert we are leaving the segment
-            guard.leavingSegment(this + " has left " + segment + ".");
+            guard.leavingSegment( this + " has left " + segment + "." );
         }
 
         // when we are here we have completed our trip and we log it.
